@@ -18,8 +18,17 @@ func main() {
 	r.POST("/multipleCreate", controller.HandleMultipleCreate)
 	r.POST("/select-omit", controller.HandleSelectOmitCreate)
 	r.POST("/mapCreate", controller.HandleCreateMap)
+
 	r.GET("/get", controller.HandleGetUser)
+	r.GET("/firstRow", controller.HandleGetFirstRow)
+	r.GET("/lastRow", controller.HandleGetLastRow)
+	r.GET("/getAll", controller.HandlerGetAll)
+	r.GET("/getByCondition", controller.HandleGetRecordByCondition)
+	r.GET("/getByIN", controller.HandleGetRecordByIN)
+	r.GET("/getByAND", controller.HandleGetRecordByAnd)
+
 	r.DELETE("/deleteByPrimaryKey", controller.HandleDeleteByPrimary)
+
 	r.PUT("updateRecord", controller.HandleUpdateRecord)
 	r.PUT("/upsert", controller.HandleOnConflict)
 

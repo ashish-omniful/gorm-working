@@ -67,7 +67,7 @@ func HandleSelectOmitCreate(ctx *gin.Context) {
 
 	user2 = user
 
-	result := database.DB.Select([]string{"Email", "Password"}).Create(&user)
+	result := database.DB.Select([]string{"Email", "Password"}).Create(&user) // table col name prefer
 	if result.Error != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"error": result.Error,

@@ -2,25 +2,25 @@ package main
 
 import (
 	"fmt"
-	"gorm.io/driver/postgres"
+	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
-	"gorm/models"
+	"gorm/controller"
+	"gorm/database"
 )
 
 var DB *gorm.DB
 
 func main() {
 
-	var err error
 	fmt.Println("check")
 
-	// connect to database
-	dsn := "host=castor.db.elephantsql.com user=beghrxzo password=toYiNr2v9TSF4aUCaeh__hRLLyquHuhc dbname=beghrxzo port=5432 sslmode=disable"
-	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	database.Init()
 
-	// migrate the user tables
-	err = DB.AutoMigrate(&models.User{})
+	r := gin.Default()
+	r.POST("/create", controller.HandleCreate)
+
+	err := r.Run(":8080")
 	if err != nil {
-		panic("cannot migrate")
+		panic("connection not established at port 8080")
 	}
 }

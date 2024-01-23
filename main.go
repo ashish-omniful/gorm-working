@@ -3,12 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 	"gorm/controller"
 	"gorm/database"
 )
-
-var DB *gorm.DB
 
 func main() {
 
@@ -18,6 +15,7 @@ func main() {
 
 	r := gin.Default()
 	r.POST("/create", controller.HandleCreate)
+	r.POST("/multipleCreate", controller.HandleMultipleCreate)
 	r.GET("/get", controller.HandleGetUser)
 	r.DELETE("/deleteByPrimaryKey", controller.HandleDeleteByPrimary)
 	r.PUT("updateRecord", controller.HandleUpdateRecord)

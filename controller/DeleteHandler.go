@@ -9,7 +9,7 @@ import (
 func HandleDeleteByPrimary(ctx *gin.Context) {
 
 	var body struct {
-		ID string `json:"id"`
+		ID uint `json:"id"`
 	}
 
 	err := ctx.ShouldBindJSON(&body)

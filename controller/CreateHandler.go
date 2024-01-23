@@ -29,3 +29,21 @@ func HandleCreate(ctx *gin.Context) {
 		"message": "success",
 	})
 }
+
+func HandleMultipleCreate(ctx *gin.Context) {
+
+	var users []models.User
+	err := ctx.ShouldBindJSON(&users)
+	if err != nil {
+		ctx.JSON(400, err)
+		return
+	}
+
+	result := database.DB.Create(&users)
+	if result.Error != nil {
+		ctx.JSON(400, result.Error)
+		return
+	}
+
+	ctx.JSON(200, "success")
+}

@@ -18,6 +18,7 @@ func main() {
 
 	r := gin.Default()
 	r.POST("/create", controller.HandleCreate)
+	r.GET("/get", controller.HandleGetUser)
 
 	err := r.Run(":8080")
 	if err != nil {

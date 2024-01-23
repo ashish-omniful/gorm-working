@@ -79,3 +79,25 @@ func HandleSelectOmitCreate(ctx *gin.Context) {
 		"message": "success",
 	})
 }
+
+func HandleCreateMap(ctx *gin.Context) {
+
+	var user models.User
+	err := ctx.ShouldBindJSON(&user)
+	if err != nil {
+		ctx.JSON(400, err)
+		return
+	}
+
+	result := database.DB.Model(&models.User{}).Create(map[string]interface{}{
+		"Name":     user.Name,
+		"Email":    user.Email,
+		"Password": user.Password,
+	})
+	if result.Error != nil {
+		ctx.JSON(400, result.Error)
+		return
+	}
+
+	ctx.JSON(200, "success")
+}

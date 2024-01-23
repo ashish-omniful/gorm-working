@@ -17,6 +17,7 @@ func main() {
 	r.POST("/create", controller.HandleCreate)
 	r.POST("/multipleCreate", controller.HandleMultipleCreate)
 	r.POST("/select-omit", controller.HandleSelectOmitCreate)
+	r.POST("/mapCreate", controller.HandleCreateMap)
 	r.GET("/get", controller.HandleGetUser)
 	r.DELETE("/deleteByPrimaryKey", controller.HandleDeleteByPrimary)
 	r.PUT("updateRecord", controller.HandleUpdateRecord)

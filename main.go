@@ -19,6 +19,8 @@ func main() {
 	r := gin.Default()
 	r.POST("/create", controller.HandleCreate)
 	r.GET("/get", controller.HandleGetUser)
+	r.DELETE("/deleteByPrimaryKey", controller.HandleDeleteByPrimary)
+	r.PUT("updateRecord", controller.HandleUpdateRecord)
 
 	err := r.Run(":8080")
 	if err != nil {

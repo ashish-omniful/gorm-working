@@ -21,6 +21,7 @@ func main() {
 	r.GET("/get", controller.HandleGetUser)
 	r.DELETE("/deleteByPrimaryKey", controller.HandleDeleteByPrimary)
 	r.PUT("updateRecord", controller.HandleUpdateRecord)
+	r.PUT("/upsert", controller.HandleOnConflict)
 
 	err := r.Run(":8080")
 	if err != nil {

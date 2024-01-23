@@ -35,13 +35,19 @@ func HandleMultipleCreate(ctx *gin.Context) {
 	var users []models.User
 	err := ctx.ShouldBindJSON(&users)
 	if err != nil {
-		ctx.JSON(400, err)
+		ctx.JSON(400, gin.H{
+			"error": "while binding json in multiple create",
+			"err":   err,
+		})
 		return
 	}
 
 	result := database.DB.Create(&users)
 	if result.Error != nil {
-		ctx.JSON(400, result.Error)
+		ctx.JSON(400, gin.H{
+			"error": "while creating multiple users",
+			"err":   result.Error,
+		})
 		return
 	}
 

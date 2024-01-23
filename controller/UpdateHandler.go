@@ -17,7 +17,7 @@ func HandleUpdateRecord(ctx *gin.Context) {
 		return
 	}
 
-	result := database.DB.Save(&user)
+	result := database.DB.Save(&user) // updates if id > 0,  otherwise inserts
 	if result.Error != nil {
 		ctx.JSON(400, gin.H{
 			"error": err,

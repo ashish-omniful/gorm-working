@@ -24,4 +24,9 @@ func Init() {
 	if err != nil {
 		panic("cannot migrate")
 	}
+
+	err = DB.AutoMigrate(&models.UserModel{})
+	if err != nil {
+		panic("cannot migrate")
+	}
 }

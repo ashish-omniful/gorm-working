@@ -47,3 +47,35 @@ func HandleMultipleCreate(ctx *gin.Context) {
 
 	ctx.JSON(200, "success")
 }
+
+func HandleSelectOmitCreate(ctx *gin.Context) {
+
+	var user, user2 models.User
+	err := ctx.ShouldBindJSON(&user)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": err,
+		})
+		return
+	}
+
+	user2 = user
+
+	result := database.DB.Select([]string{"Email", "Password"}).Create(&user)
+	if result.Error != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": result.Error,
+		})
+		return
+	}
+
+	result2 := database.DB.Omit("Email", "Password").Create(&user2)
+	if result2.Error != nil {
+		ctx.JSON(400, result2.Error)
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "success",
+	})
+}

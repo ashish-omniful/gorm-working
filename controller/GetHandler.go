@@ -127,3 +127,26 @@ func HandleGetRecordByAnd(ctx *gin.Context) {
 
 	ctx.JSON(200, users)
 }
+
+func HandlerNotCondition(ctx *gin.Context) {
+
+	var users []models.User
+	result := database.DB.Not("name = ?", "user13").Find(&users) // doesnot print null name values
+	if result.Error != nil {
+		ctx.JSON(400, result.Error)
+		return
+	}
+
+	ctx.JSON(200, users)
+}
+
+func HandlerOrCondition(ctx *gin.Context) {
+
+	var users []models.User
+	result := database.DB.Where("name = ?", "user4").Or("name = ?", "user5").Find(&users)
+	if result.Error != nil {
+		ctx.JSON(400, result.Error)
+		return
+	}
+	ctx.JSON(200, users)
+}

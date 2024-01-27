@@ -29,3 +29,46 @@ func HandleUpdateRecord(ctx *gin.Context) {
 		"message": "success",
 	})
 }
+
+// where condition is necessary with &models.User{}
+// use .Model(&user) to update that column
+func HandleUpdateSingleColumn(ctx *gin.Context) {
+
+	var user models.User
+	err := ctx.ShouldBindJSON(&user)
+	if err != nil {
+		ctx.JSON(400, err)
+		return
+	}
+	result := database.DB.Model(&user).Update("name", "changed")
+	if result.Error != nil {
+		ctx.JSON(400, result.Error)
+		return
+	}
+
+	ctx.JSON(200, "SUCCESS")
+	return
+}
+
+// when using map interfaces , use json column name
+// when using User model , use struct variable name
+func HandleUpdateSelectedColumn(ctx *gin.Context) {
+
+	var user models.User
+	err := ctx.ShouldBindJSON(&user)
+	if err != nil {
+		ctx.JSON(400, err)
+		return
+	}
+	result := database.DB.Model(&user).Omit("name").Updates(map[string]interface{}{
+		"name":     "changed again",
+		"password": "hanbhai",
+	})
+
+	if result.Error != nil {
+		ctx.JSON(400, result.Error)
+		return
+	}
+
+	ctx.JSON(200, "SUCCESS")
+}

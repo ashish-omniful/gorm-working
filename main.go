@@ -32,8 +32,10 @@ func main() {
 
 	r.DELETE("/deleteByPrimaryKey", controller.HandleDeleteByPrimary)
 
-	r.PUT("updateRecord", controller.HandleUpdateRecord)
+	r.PUT("/updateRecord", controller.HandleUpdateRecord)
 	r.PUT("/upsert", controller.HandleOnConflict)
+	r.PUT("/updateSingleColumn", controller.HandleUpdateSingleColumn)
+	r.PUT("/updateSelectedColumn", controller.HandleUpdateSelectedColumn)
 
 	err := r.Run(":8080")
 	if err != nil {

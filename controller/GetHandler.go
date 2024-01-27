@@ -150,3 +150,15 @@ func HandlerOrCondition(ctx *gin.Context) {
 	}
 	ctx.JSON(200, users)
 }
+
+func HandlerLimit(ctx *gin.Context) {
+
+	var users []models.User
+	result := database.DB.Limit(5).Find(&users)
+	if result.Error != nil {
+		ctx.JSON(400, result.Error)
+		return
+	}
+
+	ctx.JSON(200, users)
+}

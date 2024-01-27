@@ -17,8 +17,8 @@ func HandleOnConflict(ctx *gin.Context) {
 	}
 
 	result := database.DB.Clauses(clause.OnConflict{
-		Columns:   []clause.Column{{Name: "id"}}, // yahan table mein column ka naam
-		UpdateAll: true,                          // can specify selected columns using doUpdates
+		Columns:   []clause.Column{{Name: "email"}}, // yahan table mein column ka naam
+		UpdateAll: true,                             // can specify selected columns using doUpdates
 	}).Create(&user)
 	if result.Error != nil {
 		ctx.JSON(400, result.Error)

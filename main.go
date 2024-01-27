@@ -27,7 +27,8 @@ func main() {
 	r.GET("/getByIN", controller.HandleGetRecordByIN)
 	r.GET("/getByAND", controller.HandleGetRecordByAnd)
 	r.GET("/getByNOT", controller.HandlerNotCondition)
-	r.GET("getByOR", controller.HandlerOrCondition)
+	r.GET("/getByOR", controller.HandlerOrCondition)
+	r.GET("/getByLimit", controller.HandlerLimit)
 
 	r.DELETE("/deleteByPrimaryKey", controller.HandleDeleteByPrimary)
 

@@ -36,6 +36,10 @@ func main() {
 	r.PUT("/upsert", controller.HandleOnConflict)
 	r.PUT("/updateSingleColumn", controller.HandleUpdateSingleColumn)
 	r.PUT("/updateSelectedColumn", controller.HandleUpdateSelectedColumn)
+	r.PUT("/batchUpdate", controller.HandleBatchUpdate)
+
+	r.PUT("/batchDelete", controller.HandleBatchDelete)
+	r.PUT("/returnBatchDelete", controller.HandleReturnDeletedColumns)
 
 	err := r.Run(":8080")
 	if err != nil {

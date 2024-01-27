@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 	"gorm/database"
 	"gorm/models"
 )
@@ -65,6 +66,18 @@ func HandleUpdateSelectedColumn(ctx *gin.Context) {
 		"password": "hanbhai",
 	})
 
+	if result.Error != nil {
+		ctx.JSON(400, result.Error)
+		return
+	}
+
+	ctx.JSON(200, "SUCCESS")
+}
+
+// update column for all rows
+func HandleBatchUpdate(ctx *gin.Context) {
+
+	result := database.DB.Session(&gorm.Session{AllowGlobalUpdate: true}).Model(&models.User{}).Update("name", "yo")
 	if result.Error != nil {
 		ctx.JSON(400, result.Error)
 		return

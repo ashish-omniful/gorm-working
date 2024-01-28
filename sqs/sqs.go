@@ -22,7 +22,7 @@ func createQueue(svc *sqs.SQS) (queueUrl string, err error) {
 		return queueUrl, err
 	}
 
-	queueUrl = aws.StringValue(result.QueueUrl)
+	queueUrl = *result.QueueUrl
 	return queueUrl, nil
 }
 
@@ -57,10 +57,9 @@ func receiveMessages(svc *sqs.SQS, queueURL string) ([]*sqs.Message, error) {
 func Init() {
 
 	sess, err := session.NewSession(&aws.Config{
-		Region:           aws.String("us-east-1"),
-		Credentials:      credentials.NewStaticCredentials("test", "test", ""),
-		S3ForcePathStyle: aws.Bool(true),
-		Endpoint:         aws.String("http://localhost:4566"),
+		Region:      aws.String("us-east-1"),
+		Credentials: credentials.NewStaticCredentials("test", "test", ""),
+		Endpoint:    aws.String("http://localhost:4566"),
 	})
 
 	if err != nil {
